@@ -25,7 +25,7 @@ from nd2reader import ND2Reader
 from nd2reader.label_map import LabelMap
 from nd2reader.raw_metadata import RawMetadata
 from nd2reader.common_raw_metadata import parse_roi_shape, parse_roi_type, parse_dimension_text_line
-
+import dask.array
 from .ext import bitplane
 
 if bitplane.IMSWRITER:
