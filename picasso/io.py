@@ -68,7 +68,6 @@ def load_raw(path, prompt_info=None, progress=None):
 
 
 def load_ims(path, prompt_info=None):
-
     file = IMSFile(path)
 
     if len(file.channels) > 1:
@@ -84,6 +83,12 @@ def load_ims(path, prompt_info=None):
         channel = "Channel 0"
 
     file.read_movie()
+
+    # Determine whether the movie is a Dask array or not
+    use_dask = isinstance(file.movie, dask.array.core.Array)
+
+    # Add the use_dask attribute to the movie object
+    file.movie.use_dask = use_dask
 
     info = {}
 
@@ -108,6 +113,7 @@ def load_ims(path, prompt_info=None):
     info = [info]
 
     return file.movie, info
+
 
 
 def load_ims_all(path):
